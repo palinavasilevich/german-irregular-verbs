@@ -5,6 +5,7 @@ import { VerbContext } from "@/context/VerbContext";
 
 import PracticeVerbsTable from "@/components/tables/practiceVerbs/practiceVerbsTable";
 import { shuffleItemsOfArray } from "@/utils/shuffleItemsOfArray";
+import { Spinner } from "@/components/ui/spinner";
 
 const PracticePage = () => {
   const { selectedVerbs } = useContext(VerbContext);
@@ -15,7 +16,11 @@ const PracticePage = () => {
         <h2 className="section-title mb-8 text-center mx-auto">
           German Irregular Verbs
         </h2>
-        <PracticeVerbsTable verbs={shuffleItemsOfArray(selectedVerbs)} />
+        {selectedVerbs && selectedVerbs.length > 0 ? (
+          <PracticeVerbsTable verbs={shuffleItemsOfArray(selectedVerbs)} />
+        ) : (
+          <Spinner>Loading...</Spinner>
+        )}
       </div>
     </section>
   );

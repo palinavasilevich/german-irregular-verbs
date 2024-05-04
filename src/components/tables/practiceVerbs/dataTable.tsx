@@ -35,27 +35,6 @@ export function DataTable<TData, TValue>({
 
   const inputRefs = useRef<HTMLInputElement[]>([]);
 
-  const handleKeyPress = (currentInputIdx: number) => () => {
-    const inputs = inputRefs.current;
-
-    let nextInput: HTMLInputElement | undefined = inputs[currentInputIdx + 1];
-
-    if (!nextInput) {
-      const next = inputs
-        .slice(currentInputIdx + 1)
-        .find((input) => input !== undefined);
-
-      nextInput = next ? next : inputs.find((input) => input !== undefined);
-    }
-
-    nextInput?.focus();
-    delete inputs[currentInputIdx];
-
-    if (inputs.every((input) => input === undefined)) {
-      setIsOpenDialog(true);
-    }
-  };
-
   useEffect(() => {
     const input: HTMLInputElement = inputRefs.current[0];
 
@@ -70,6 +49,29 @@ export function DataTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       columnFilters,
+    },
+    meta: {
+      goToNextInput: (currentInputIndex: number) => {
+        const inputs = inputRefs.current;
+
+        let nextInput: HTMLInputElement | undefined =
+          inputs[currentInputIndex + 1];
+
+        if (!nextInput) {
+          const next = inputs
+            .slice(currentInputIndex + 1)
+            .find((input) => input !== undefined);
+
+          nextInput = next ? next : inputs.find((input) => input !== undefined);
+        }
+
+        nextInput?.focus();
+        delete inputs[currentInputIndex];
+
+        if (inputs.every((input) => input === undefined)) {
+          setIsOpenDialog(true);
+        }
+      },
     },
   });
 
@@ -106,12 +108,11 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, {
                         ...cell.getContext(),
-                        cellRef: (node: HTMLInputElement) => {
+                        ref: (node: HTMLInputElement) => {
                           if (node) {
                             inputRefs.current[rowIdx * 3 + cellIdx] = node;
                           }
                         },
-                        handleKeyPress: handleKeyPress(rowIdx * 3 + cellIdx),
                       })}
                     </TableCell>
                   ))}

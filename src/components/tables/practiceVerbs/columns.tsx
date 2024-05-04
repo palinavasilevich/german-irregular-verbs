@@ -14,10 +14,13 @@ export type Verb = {
 };
 
 export const columns: ColumnDef<Verb>[] = [
-  ...HEADERS.map(({ accessorKey, title }) => ({
+  ...HEADERS.map(({ accessorKey, title }, index) => ({
     accessorKey,
     header: () => <div className="text-base font-bold capitalize">{title}</div>,
     cell: WordInput,
+    meta: {
+      cellIndex: index,
+    },
   })),
   {
     accessorKey: "translation",

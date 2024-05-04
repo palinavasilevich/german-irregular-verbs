@@ -7,20 +7,25 @@ import { NUMBER_OF_ATTEMPTS_TO_ENTER_VERB } from "@/constants";
 
 interface WordInputPropsType
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  handleKeyPress?: () => void;
-  cellRef?: any;
   getValue: () => any;
+  row: any;
+  column: any;
+  table: any;
+  cell: any;
 }
 
-const WordInput = forwardRef<HTMLInputElement, WordInputPropsType>(
-  ({ handleKeyPress, cellRef, getValue, ...props }) => {
+const WordInput = forwardRef<HTMLTableCellElement, WordInputPropsType>(
+  ({ getValue, row, column, table }, ref) => {
+    const correctValue = getValue();
+    const columnMeta = column.columnDef.meta;
+    const tableMeta = table.options.meta;
+    const currentInputIndex = row.index * 3 + columnMeta.cellIndex;
+
     const [value, setValue] = useState<string>("");
     const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);
     const [numberOfAttempts, setNumberOfAttempts] = useState(
       NUMBER_OF_ATTEMPTS_TO_ENTER_VERB
     );
-
-    const correctValue = getValue();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
       setValue(e.target.value);
@@ -28,13 +33,13 @@ const WordInput = forwardRef<HTMLInputElement, WordInputPropsType>(
     const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter") {
         if (value.trim() !== correctValue) {
-          if (numberOfAttempts - 1 === 0 && handleKeyPress) {
-            handleKeyPress();
+          if (numberOfAttempts - 1 === 0) {
+            tableMeta.goToNextInput(currentInputIndex);
           }
           setNumberOfAttempts(numberOfAttempts - 1);
         } else {
           setIsCorrectAnswer(true);
-          if (handleKeyPress) handleKeyPress();
+          tableMeta.goToNextInput(currentInputIndex);
         }
       }
     };
@@ -53,8 +58,7 @@ const WordInput = forwardRef<HTMLInputElement, WordInputPropsType>(
             : ""
         }`}
         disabled={isCorrectAnswer || numberOfAttempts === 0}
-        ref={cellRef}
-        {...props}
+        ref={ref}
       />
     );
   }

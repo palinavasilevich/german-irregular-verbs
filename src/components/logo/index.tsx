@@ -8,9 +8,8 @@ const Logo = () => {
     <Link href="/">
       <div className={styles.container}>
         <div className={styles.imgContainer}>
-          <Image src="/logo.png" alt="logo_img" fill />
+          <Image src="/logo.svg" alt="logo_img" fill />
         </div>
-        <span className={styles.text}>mighty verbs</span>
       </div>
     </Link>
   );

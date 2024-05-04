@@ -1,0 +1,592 @@
+{
+  "verbs": [
+    {
+      "infinitive": "bleiben",
+      "pastSimple": "blieb",
+      "pastParticle": "ist geblieben",
+      "translation": "оставаться",
+      "group": "I"
+    },
+    {
+      "infinitive": "gedeihen",
+      "pastSimple": "gedieh",
+      "pastParticle": "ist gediehen",
+      "translation": "расти, процветать",
+      "group": "I"
+    },
+    {
+      "infinitive": "leihen",
+      "pastSimple": "lieh",
+      "pastParticle": "hat geliehen",
+      "translation": "одалживать",
+      "group": "I"
+    },
+    {
+      "infinitive": "meiden",
+      "pastSimple": "mied",
+      "pastParticle": "hat gemieden",
+      "translation": "избегать",
+      "group": "I"
+    },
+    {
+      "infinitive": "preisen",
+      "pastSimple": "pries",
+      "pastParticle": "hat gepriesen",
+      "translation": "хвалить",
+      "group": "I"
+    },
+    {
+      "infinitive": "reiben",
+      "pastSimple": "rieb",
+      "pastParticle": "hat gerieben",
+      "translation": "тереть",
+      "group": "I"
+    },
+    {
+      "infinitive": "scheiden",
+      "pastSimple": "schied",
+      "pastParticle": "hat/ist geschieden",
+      "translation": "разделять, отделять",
+      "group": "I"
+    },
+    {
+      "infinitive": "scheinen",
+      "pastSimple": "schien",
+      "pastParticle": "hat geschienen",
+      "translation": "светить, сиять",
+      "group": "I"
+    },
+    {
+      "infinitive": "schreiben",
+      "pastSimple": "schrieb",
+      "pastParticle": "hat geschrieben",
+      "translation": "писать",
+      "group": "I"
+    },
+    {
+      "infinitive": "schreien",
+      "pastSimple": "schrie",
+      "pastParticle": "hat geschrien",
+      "translation": "кричать",
+      "group": "I"
+    },
+    {
+      "infinitive": "schweigen",
+      "pastSimple": "schwieg",
+      "pastParticle": "hat geschwiegen",
+      "translation": "молчать, замолчать",
+      "group": "I"
+    },
+    {
+      "infinitive": "steigen",
+      "pastSimple": "stieg",
+      "pastParticle": "ist gestiegen",
+      "translation": "подниматься",
+      "group": "I"
+    },
+    {
+      "infinitive": "treiben",
+      "pastSimple": "trieb",
+      "pastParticle": "hat/ist getrieben",
+      "translation": "заниматься чем-либо, гнать",
+      "group": "I"
+    },
+    {
+      "infinitive": "weisen",
+      "pastSimple": "wies",
+      "pastParticle": "hat gewiesen",
+      "translation": "указывать, отсылать",
+      "group": "I"
+    },
+    {
+      "infinitive": "verzeihen",
+      "pastSimple": "verzieh",
+      "pastParticle": "hat verziehen",
+      "translation": "прощать",
+      "group": "I"
+    },
+    {
+      "infinitive": "streiten",
+      "pastSimple": "stritt",
+      "pastParticle": "hat gestritten",
+      "translation": "спорить",
+      "group": "II"
+    },
+    {
+      "infinitive": "beißen",
+      "pastSimple": "biss",
+      "pastParticle": "hat gebissen",
+      "translation": "кусать",
+      "group": "II"
+    },
+    {
+      "infinitive": "bleichen",
+      "pastSimple": "blich",
+      "pastParticle": "hat geblichen",
+      "translation": "отбеливать",
+      "group": "II"
+    },
+    {
+      "infinitive": "gleichen",
+      "pastSimple": "glich",
+      "pastParticle": "hat geglichen",
+      "translation": "быть похожим",
+      "group": "II"
+    },
+    {
+      "infinitive": "gleiten",
+      "pastSimple": "glitt",
+      "pastParticle": "ist geglitten",
+      "translation": "скользить",
+      "group": "II"
+    },
+    {
+      "infinitive": "greifen",
+      "pastSimple": "griff",
+      "pastParticle": "hat gegriffen",
+      "translation": "хватать",
+      "group": "II"
+    },
+    {
+      "infinitive": "kneifen",
+      "pastSimple": "kniff",
+      "pastParticle": "hat gekniffen",
+      "translation": "щипать",
+      "group": "II"
+    },
+    {
+      "infinitive": "pfeifen",
+      "pastSimple": "pfiff",
+      "pastParticle": "hat gepfiffen",
+      "translation": "свистеть",
+      "group": "II"
+    },
+    {
+      "infinitive": "reißen",
+      "pastSimple": "riss",
+      "pastParticle": "hat/ist gerissen",
+      "translation": "рвать",
+      "group": "II"
+    },
+    {
+      "infinitive": "reiten",
+      "pastSimple": "ritt",
+      "pastParticle": "hat/ist geritten",
+      "translation": "ездить верхом",
+      "group": "II"
+    },
+    {
+      "infinitive": "schleichen",
+      "pastSimple": "schlich",
+      "pastParticle": "ist geschlichen",
+      "translation": "красться",
+      "group": "II"
+    },
+    {
+      "infinitive": "schleifen",
+      "pastSimple": "schliff",
+      "pastParticle": "hat geschliffen",
+      "translation": "шлифовать, точить",
+      "group": "II"
+    },
+    {
+      "infinitive": "schreiten",
+      "pastSimple": "schritt",
+      "pastParticle": "ist geschritten",
+      "translation": "шагать",
+      "group": "II"
+    },
+    {
+      "infinitive": "streichen",
+      "pastSimple": "strich",
+      "pastParticle": "hat gestrichen",
+      "translation": "вычеркивать",
+      "group": "II"
+    },
+    {
+      "infinitive": "gießen",
+      "pastSimple": "goss",
+      "pastParticle": "hat gegossen",
+      "translation": "лить, наливать",
+      "group": "III"
+    },
+    {
+      "infinitive": "fließen",
+      "pastSimple": "floss",
+      "pastParticle": "ist geflossen",
+      "translation": "течь",
+      "group": "III"
+    },
+    {
+      "infinitive": "genießen",
+      "pastSimple": "genoss",
+      "pastParticle": "hat genossen",
+      "translation": "наслаждаться",
+      "group": "III"
+    },
+    {
+      "infinitive": "kriechen",
+      "pastSimple": "kroch",
+      "pastParticle": "ist gekrochen",
+      "translation": "ползать",
+      "group": "III"
+    },
+    {
+      "infinitive": "riechen",
+      "pastSimple": "roch",
+      "pastParticle": "hat gerochen",
+      "translation": "нюхать, пахнуть",
+      "group": "III"
+    },
+    {
+      "infinitive": "schießen",
+      "pastSimple": "schoss",
+      "pastParticle": "hat geschossen",
+      "translation": "стрелять",
+      "group": "III"
+    },
+    {
+      "infinitive": "schließen",
+      "pastSimple": "schloss",
+      "pastParticle": "hat geschlossen",
+      "translation": "закрывать",
+      "group": "III"
+    },
+    {
+      "infinitive": "verdrießen",
+      "pastSimple": "verdross",
+      "pastParticle": "hat verdrossen",
+      "translation": "сердить",
+      "group": "III"
+    },
+    {
+      "infinitive": "biegen",
+      "pastSimple": "bog",
+      "pastParticle": "ist gebogen",
+      "translation": "сгибать",
+      "group": "IV"
+    },
+    {
+      "infinitive": "bieten",
+      "pastSimple": "bot",
+      "pastParticle": "hat geboten",
+      "translation": "предлагать",
+      "group": "IV"
+    },
+    {
+      "infinitive": "fliegen",
+      "pastSimple": "flog",
+      "pastParticle": "hat geflogen",
+      "translation": "летать",
+      "group": "IV"
+    },
+    {
+      "infinitive": "fliehen",
+      "pastSimple": "floh",
+      "pastParticle": "ist geflohen",
+      "translation": "убегать",
+      "group": "IV"
+    },
+    {
+      "infinitive": "frieren",
+      "pastSimple": "fror",
+      "pastParticle": "hat gefroren",
+      "translation": "мерзнуть",
+      "group": "IV"
+    },
+    {
+      "infinitive": "schieben",
+      "pastSimple": "schob",
+      "pastParticle": "hat geschoben",
+      "translation": "двигать, толкать",
+      "group": "IV"
+    },
+    {
+      "infinitive": "verlieren",
+      "pastSimple": "verlor",
+      "pastParticle": "hat verloren",
+      "translation": "терять",
+      "group": "IV"
+    },
+    {
+      "infinitive": "wiegen",
+      "pastSimple": "wog",
+      "pastParticle": "hat gewogen",
+      "translation": "весить, взвешивать",
+      "group": "IV"
+    },
+    {
+      "infinitive": "ziehen",
+      "pastSimple": "zog",
+      "pastParticle": "ist gezogen",
+      "translation": "тянуть",
+      "group": "IV"
+    },
+    {
+      "infinitive": "finden",
+      "pastSimple": "fand",
+      "pastParticle": "hat gefunden",
+      "translation": "находить",
+      "group": "V"
+    },
+    {
+      "infinitive": "binden",
+      "pastSimple": "band",
+      "pastParticle": "hat gebunden",
+      "translation": "связывать",
+      "group": "V"
+    },
+    {
+      "infinitive": "dringen",
+      "pastSimple": "drang",
+      "pastParticle": "hat/ist gedrungen",
+      "translation": "проникать",
+      "group": "V"
+    },
+    {
+      "infinitive": "gelingen",
+      "pastSimple": "gelang",
+      "pastParticle": "ist gelungen",
+      "translation": "удаваться",
+      "group": "V"
+    },
+    {
+      "infinitive": "klingen",
+      "pastSimple": "klang",
+      "pastParticle": "hat geklungen",
+      "translation": "звенеть, звучать",
+      "group": "V"
+    },
+    {
+      "infinitive": "misslingen",
+      "pastSimple": "misslang",
+      "pastParticle": "ist misslungen",
+      "translation": "не удаваться",
+      "group": "V"
+    },
+    {
+      "infinitive": "ringen",
+      "pastSimple": "rang",
+      "pastParticle": "hat gerungen",
+      "translation": "бороться",
+      "group": "V"
+    },
+    {
+      "infinitive": "schlingen",
+      "pastSimple": "schlang",
+      "pastParticle": "hat geschlungen",
+      "translation": "обвивать, завязывать (узлом)",
+      "group": "V"
+    },
+    {
+      "infinitive": "schwingen",
+      "pastSimple": "schwang",
+      "pastParticle": "hat geschwungen",
+      "translation": "махать, размахивать",
+      "group": "V"
+    },
+    {
+      "infinitive": "schwinden",
+      "pastSimple": "schwand",
+      "pastParticle": "ist geschwunden",
+      "translation": "исчезать, убывать",
+      "group": "V"
+    },
+    {
+      "infinitive": "singen",
+      "pastSimple": "sang",
+      "pastParticle": "hat gesungen",
+      "translation": "петь",
+      "group": "V"
+    },
+    {
+      "infinitive": "sinken",
+      "pastSimple": "sank",
+      "pastParticle": "ist gesunken",
+      "translation": "падать, понижаться",
+      "group": "V"
+    },
+    {
+      "infinitive": "springen",
+      "pastSimple": "sprang",
+      "pastParticle": "ist gesprungen",
+      "translation": "прыгать, скакать",
+      "group": "V"
+    },
+    {
+      "infinitive": "stinken",
+      "pastSimple": "stank",
+      "pastParticle": "hat gestunken",
+      "translation": "дурно пахнуть",
+      "group": "V"
+    },
+    {
+      "infinitive": "trinken",
+      "pastSimple": "trank",
+      "pastParticle": "hat getrunken",
+      "translation": "пить",
+      "group": "V"
+    },
+    {
+      "infinitive": "winden",
+      "pastSimple": "wand",
+      "pastParticle": "hat gewunden",
+      "translation": "мотать, наматывать",
+      "group": "V"
+    },
+    {
+      "infinitive": "zwingen",
+      "pastSimple": "zwang",
+      "pastParticle": "hat gezwungen",
+      "translation": "вынуждать",
+      "group": "V"
+    },
+    {
+      "infinitive": "gewinnen",
+      "pastSimple": "gewann",
+      "pastParticle": "hat gewonnen",
+      "translation": "выигрывать, добывать (ископаемые)",
+      "group": "VI"
+    },
+    {
+      "infinitive": "beginnen",
+      "pastSimple": "begann",
+      "pastParticle": "hat begonnen",
+      "translation": "начинать",
+      "group": "VI"
+    },
+    {
+      "infinitive": "rinnen",
+      "pastSimple": "rann",
+      "pastParticle": "ist geronnen",
+      "translation": "течь, струиться",
+      "group": "VI"
+    },
+    {
+      "infinitive": "schwimmen",
+      "pastSimple": "schwamm",
+      "pastParticle": "ist geschwommen",
+      "translation": "плавать, плыть",
+      "group": "VI"
+    },
+    {
+      "infinitive": "sinnen",
+      "pastSimple": "sann",
+      "pastParticle": "hat gesonnen",
+      "translation": "размышлять",
+      "group": "VI"
+    },
+    {
+      "infinitive": "spinnen",
+      "pastSimple": "spann",
+      "pastParticle": "hat gesponnen",
+      "translation": "прясть",
+      "group": "VI"
+    },
+    {
+      "infinitive": "helfen",
+      "pastSimple": "half",
+      "pastParticle": "hat geholfen",
+      "translation": "помогать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "bergen",
+      "pastSimple": "barg",
+      "pastParticle": "hat geborgen",
+      "translation": "прятать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "bersten",
+      "pastSimple": "barst",
+      "pastParticle": "ist geborsten",
+      "translation": "лопнуть",
+      "group": "VII"
+    },
+    {
+      "infinitive": "brechen",
+      "pastSimple": "brach",
+      "pastParticle": "hat gebrochen",
+      "translation": "сломать, разбить",
+      "group": "VII"
+    },
+    {
+      "infinitive": "dreschen",
+      "pastSimple": "drosch",
+      "pastParticle": "hat gedroschen",
+      "translation": "молотить",
+      "group": "VII"
+    },
+    {
+      "infinitive": "erschrecken",
+      "pastSimple": "erschrak",
+      "pastParticle": "ist erschrocken",
+      "translation": "испугаться",
+      "group": "VII"
+    },
+    {
+      "infinitive": "gelten",
+      "pastSimple": "galt",
+      "pastParticle": "hat gegolten",
+      "translation": "стоить, цениться",
+      "group": "VII"
+    },
+    {
+      "infinitive": "schelten",
+      "pastSimple": "schalt",
+      "pastParticle": "hat gescholten",
+      "translation": "бранить, ругать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "sprechen",
+      "pastSimple": "sprach",
+      "pastParticle": "hat gesprochen",
+      "translation": "говорить, разговаривать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "stechen",
+      "pastSimple": "stach",
+      "pastParticle": "hat gestochen",
+      "translation": "колоть",
+      "group": "VII"
+    },
+    {
+      "infinitive": "sterben",
+      "pastSimple": "starb",
+      "pastParticle": "ist gestorben",
+      "translation": "умирать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "treffen",
+      "pastSimple": "traf",
+      "pastParticle": "hat getroffen",
+      "translation": "встречать, заставать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "verderben",
+      "pastSimple": "verdarb",
+      "pastParticle": "ist verdorben",
+      "translation": "портить, испортить",
+      "group": "VII"
+    },
+    {
+      "infinitive": "werben",
+      "pastSimple": "warb",
+      "pastParticle": "hat geworben",
+      "translation": "рекламировать",
+      "group": "VII"
+    },
+    {
+      "infinitive": "werfen",
+      "pastSimple": "warf",
+      "pastParticle": "hat geworfen",
+      "translation": "бросать",
+      "group": "VII"
+    }
+  ]
+}

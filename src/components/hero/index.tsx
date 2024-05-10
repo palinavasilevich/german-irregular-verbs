@@ -19,7 +19,7 @@ const Hero = () => {
               <Link href="/verbs">
                 <Button className="gap-x-2">Verb list</Button>
               </Link>
-              <Link href="/practice">
+              <Link href="/learn-random-verbs">
                 <Button variant="secondary" className="gap-x-2">
                   Practice
                 </Button>

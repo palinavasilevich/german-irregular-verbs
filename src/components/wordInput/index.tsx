@@ -5,16 +5,19 @@ import { KeyboardEvent, ChangeEvent, useState, forwardRef } from "react";
 import { Input } from "../ui/input";
 import { NUMBER_OF_ATTEMPTS_TO_ENTER_VERB } from "@/constants";
 
+import { ColumnDef, Table, Row, Column, Cell } from "@tanstack/react-table";
+import { useDispatch } from "react-redux";
+import { toggleCorrectValue } from "@/lib/redux/features/verb.slice";
 interface WordInputPropsType
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  getValue: () => any;
-  row: any;
-  column: any;
-  table: any;
-  cell: any;
+  // table: Table<TData>;
+  // row: Row<TData>;
+  // column: Column<TData>;
+  // cell: Cell<TData>;
+  // getValue: () => any;
 }
 
-const WordInput = forwardRef<HTMLTableCellElement, WordInputPropsType>(
+const WordInput = forwardRef<HTMLTableSectionElement, WordInputPropsType>(
   ({ getValue, row, column, table }, ref) => {
     const correctValue = getValue();
     const columnMeta = column.columnDef.meta;
@@ -26,6 +29,8 @@ const WordInput = forwardRef<HTMLTableCellElement, WordInputPropsType>(
     const [numberOfAttempts, setNumberOfAttempts] = useState(
       NUMBER_OF_ATTEMPTS_TO_ENTER_VERB
     );
+
+    const dispatch = useDispatch();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
       setValue(e.target.value);
@@ -39,6 +44,7 @@ const WordInput = forwardRef<HTMLTableCellElement, WordInputPropsType>(
           setNumberOfAttempts(numberOfAttempts - 1);
         } else {
           setIsCorrectAnswer(true);
+          dispatch(toggleCorrectValue({ id: correctValue }));
           tableMeta.goToNextInput(currentInputIndex);
         }
       }
@@ -50,7 +56,9 @@ const WordInput = forwardRef<HTMLTableCellElement, WordInputPropsType>(
         onChange={handleChange}
         onKeyDown={handleKeydown}
         className={`w-[200px] border-dashed border-gray-500 !ring-transparent focus-visible:border-violet-700 text-base ${
-          numberOfAttempts === 0 ? "border-rose-500" : ""
+          numberOfAttempts < NUMBER_OF_ATTEMPTS_TO_ENTER_VERB
+            ? "border-rose-500"
+            : ""
         } ${
           isCorrectAnswer &&
           numberOfAttempts === NUMBER_OF_ATTEMPTS_TO_ENTER_VERB

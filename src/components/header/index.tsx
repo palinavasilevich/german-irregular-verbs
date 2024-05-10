@@ -1,14 +1,26 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import ThemeSwitcher from "../themeSwitcher";
 import Logo from "../logo";
 import Navbar from "../navbar";
 import MobileNavbar from "../navbar/mobileNavbar";
 
 const Header = () => {
+  const [header, setHeader] = useState(false);
+
+  useEffect(() => {
+    const scrollYPos = window.addEventListener("scroll", () => {
+      window.scrollY > 50 ? setHeader(true) : setHeader(false);
+    });
+
+    return () => window.removeEventListener("scroll", scrollYPos);
+  });
+
   return (
     <header
-      className={`py-4 bg-white shadow-lg dark:bg-accent sticky top-0 z-30 transition-all`}
+      className={`${header && " bg-white shadow-lg dark:bg-accent"}
+      py-4  sticky top-0 z-30 transition-all"}`}
     >
       <div className="container mx-auto">
         <div className="flex justify-between items-center">

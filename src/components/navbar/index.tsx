@@ -14,8 +14,8 @@ const links = [
   },
 
   {
-    title: "practice",
-    path: "/practice",
+    title: "Learn random verbs",
+    path: "/learn-random-verbs",
   },
 ];
 

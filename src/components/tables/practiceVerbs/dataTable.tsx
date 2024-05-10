@@ -7,6 +7,7 @@ import {
   getCoreRowModel,
   useReactTable,
   getFilteredRowModel,
+  RowData,
 } from "@tanstack/react-table";
 
 import {
@@ -19,6 +20,14 @@ import {
 } from "@/components/ui/table";
 
 import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { calculateResults } from "@/lib/redux/features/verb.slice";
+
+declare module "@tanstack/react-table" {
+  interface TableMeta<TData extends RowData> {
+    goToNextInput: (currentInputIndex: number) => void;
+  }
+}
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -34,6 +43,8 @@ export function DataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const inputRefs = useRef<HTMLInputElement[]>([]);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const input: HTMLInputElement = inputRefs.current[0];
@@ -69,6 +80,7 @@ export function DataTable<TData, TValue>({
         delete inputs[currentInputIndex];
 
         if (inputs.every((input) => input === undefined)) {
+          dispatch(calculateResults());
           setIsOpenDialog(true);
         }
       },

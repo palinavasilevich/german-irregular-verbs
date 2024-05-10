@@ -4,14 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import WordInput from "@/components/wordInput";
 import { HEADERS } from "@/constants";
-
-export type Verb = {
-  infinitive: string;
-  pastSimple: string;
-  pastParticle: string;
-  translation: string;
-  group: number;
-};
+import { Verb } from "@/types";
 
 export const columns: ColumnDef<Verb>[] = [
   ...HEADERS.map(({ accessorKey, title }, index) => ({

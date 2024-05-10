@@ -2,12 +2,10 @@
 
 import { columns } from "./columns";
 import { DataTable } from "./dataTable";
-import { Verb } from "@/types";
 
 import {
   AlertDialog,
   AlertDialogAction,
-  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -16,10 +14,17 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { selectResults } from "@/lib/redux/features/verb.slice";
 
 const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const { push, refresh } = useRouter();
+
+  const {
+    numberOfIncorrectAnswers,
+    percentageOfCorrectAnswers,
+  } = useSelector(selectResults);
 
   return (
     <>
@@ -33,8 +38,8 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
           <AlertDialogHeader>
             <AlertDialogTitle>Gut gemacht!</AlertDialogTitle>
             <AlertDialogDescription>
-              <div>Errors: </div>
-              <div>Success: 0%</div>
+              <div>Errors: {numberOfIncorrectAnswers}</div>
+              <div>{`Success: ${percentageOfCorrectAnswers.toFixed(2)}%`}</div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -42,7 +47,12 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
             <AlertDialogAction onClick={() => push("/")}>
               Go Home
             </AlertDialogAction>
-            <AlertDialogAction onClick={() => refresh()}>
+            <AlertDialogAction
+              onClick={() => {
+                window.location.reload();
+                // refresh();
+              }}
+            >
               Learn verbs again
             </AlertDialogAction>
           </AlertDialogFooter>

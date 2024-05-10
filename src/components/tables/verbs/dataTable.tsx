@@ -20,14 +20,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RocketIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 
-import { VerbContext } from "@/context/VerbContext";
-import { storage } from "@/utils/storage";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/redux/store";
+import { addVerbsToStudy } from "@/lib/redux/features/verb.slice";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -59,17 +60,16 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const dispatch = useDispatch<AppDispatch>();
   const { push } = useRouter();
-  const { setSelectedVerbs } = useContext(VerbContext);
 
-  const addVerbsToStudy = () => {
+  const onClickAddVerbsToStudy = () => {
     const selectedVerbs = table
       .getFilteredSelectedRowModel()
       .rows.map((row) => row.original);
 
     if (selectedVerbs && selectedVerbs.length > 0) {
-      setSelectedVerbs(selectedVerbs);
-      storage.setItem("selectedVerbs", selectedVerbs);
+      dispatch(addVerbsToStudy(selectedVerbs));
       push("/practice");
     }
   };
@@ -77,20 +77,18 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full space-y-2.5 overflow-auto">
       <div className="flex items-center justify-between py-4">
-        <div>
-          <Input
-            placeholder="Search verb..."
-            value={
-              (table.getColumn("infinitive")?.getFilterValue() as string) ?? ""
-            }
-            onChange={(event) =>
-              table.getColumn("infinitive")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-        </div>
+        <Input
+          placeholder="Search verb..."
+          value={
+            (table.getColumn("infinitive")?.getFilterValue() as string) ?? ""
+          }
+          onChange={(event) =>
+            table.getColumn("infinitive")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
         {table.getFilteredSelectedRowModel().rows.length > 0 && (
-          <Button variant="outline" size="sm" onClick={addVerbsToStudy}>
+          <Button variant="outline" size="sm" onClick={onClickAddVerbsToStudy}>
             <RocketIcon className="mr-2 size-4" aria-hidden="true" />
             {`Study ${table.getFilteredSelectedRowModel().rows.length} ${
               table.getFilteredSelectedRowModel().rows.length === 1

@@ -5,16 +5,15 @@ import { KeyboardEvent, ChangeEvent, useState, forwardRef } from "react";
 import { Input } from "../ui/input";
 import { NUMBER_OF_ATTEMPTS_TO_ENTER_VERB } from "@/constants";
 
-import { ColumnDef, Table, Row, Column, Cell } from "@tanstack/react-table";
+import { Table, Row, Column } from "@tanstack/react-table";
 import { useDispatch } from "react-redux";
 import { toggleCorrectValue } from "@/lib/redux/features/verb.slice";
 interface WordInputPropsType
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  // table: Table<TData>;
-  // row: Row<TData>;
-  // column: Column<TData>;
-  // cell: Cell<TData>;
-  // getValue: () => any;
+  table: Table<any>;
+  row: Row<any>;
+  column: Column<any>;
+  getValue: () => any;
 }
 
 const WordInput = forwardRef<HTMLTableSectionElement, WordInputPropsType>(
@@ -22,7 +21,7 @@ const WordInput = forwardRef<HTMLTableSectionElement, WordInputPropsType>(
     const correctValue = getValue();
     const columnMeta = column.columnDef.meta;
     const tableMeta = table.options.meta;
-    const currentInputIndex = row.index * 3 + columnMeta.cellIndex;
+    const currentInputIndex = row.index * 3 + columnMeta?.cellIndex;
 
     const [value, setValue] = useState<string>("");
     const [isCorrectAnswer, setIsCorrectAnswer] = useState<boolean>(false);

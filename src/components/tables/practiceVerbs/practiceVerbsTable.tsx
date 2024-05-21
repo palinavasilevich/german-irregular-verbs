@@ -21,10 +21,8 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const { push, refresh } = useRouter();
 
-  const {
-    numberOfIncorrectAnswers,
-    percentageOfCorrectAnswers,
-  } = useSelector(selectResults);
+  const { numberOfIncorrectAnswers, percentageOfCorrectAnswers } =
+    useSelector(selectResults);
 
   return (
     <>
@@ -44,8 +42,8 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
-            <AlertDialogAction onClick={() => push("/")}>
-              Go Home
+            <AlertDialogAction onClick={() => push("/verbs")}>
+              All verbs
             </AlertDialogAction>
             <AlertDialogAction
               onClick={() => {

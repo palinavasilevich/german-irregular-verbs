@@ -9,6 +9,9 @@ import {
   getFilteredRowModel,
   SortingState,
   getSortedRowModel,
+  FilterMeta,
+  Column,
+  Table as TableType,
 } from "@tanstack/react-table";
 
 import {
@@ -29,10 +32,18 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/redux/store";
 import { addVerbsToStudy } from "@/lib/redux/features/verb.slice";
+import ScrollToTop from "@/components/scrollToTop";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+}
+
+interface CustomFilterMeta extends FilterMeta {
+  filterComponent: (info: {
+    column: Column<any, unknown>;
+    table: TableType<any>;
+  }) => JSX.Element;
 }
 
 export function DataTable<TData, TValue>({
@@ -76,6 +87,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full space-y-2.5 overflow-auto">
+      <ScrollToTop />
       <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Search verb..."
@@ -106,7 +118,16 @@ export function DataTable<TData, TValue>({
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder
+                      {header.column.columnDef?.meta &&
+                      (header.column.columnDef?.meta as CustomFilterMeta)
+                        .filterComponent
+                        ? (
+                            header.column.columnDef?.meta as CustomFilterMeta
+                          ).filterComponent({
+                            column: header.column,
+                            table,
+                          })
+                        : header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,

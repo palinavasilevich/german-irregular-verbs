@@ -10,8 +10,10 @@ type LearnedVerb = {
 };
 
 type InitialState = {
+  verbs: Verb[] | null;
   selectedVerbs: Verb[] | null;
   learnedVerbs: LearnedVerb[] | null;
+  favoriteVerbs: Verb[] | null;
   results: {
     numberOfCorrectAnswers: number;
     numberOfIncorrectAnswers: number;
@@ -39,9 +41,15 @@ if (initialSelectedVerbs) {
   });
 }
 
+const initialFavoriteVerbs = storage.getItem("favoriteVerbs") || null;
+
+const initialVerbs = storage.getItem("verbs") || null;
+
 const initialState = {
+  verbs: initialVerbs,
   selectedVerbs: initialSelectedVerbs,
   learnedVerbs: initialLearnedVerbs,
+  favoriteVerbs: initialFavoriteVerbs,
   results: {
     numberOfCorrectAnswers: 0,
     numberOfIncorrectAnswers: 0,
@@ -87,16 +95,45 @@ export const verbSlice = createSlice({
         percentageOfCorrectAnswers,
       };
     },
+
+    addFavoriteVerb: (state, action: PayloadAction<string>) => {
+      const verb = state.verbs?.find((v: Verb) => {
+        return v.infinitive === action.payload;
+      });
+
+      if (verb) {
+        const favoriteVerbs = [...state.favoriteVerbs, verb];
+        storage.setItem("favoriteVerbs", favoriteVerbs);
+        state.favoriteVerbs = favoriteVerbs;
+      }
+    },
+
+    removeFavoriteVerb: (state, action: PayloadAction<string>) => {
+      const favoriteVerbs = state.favoriteVerbs?.filter(
+        (v: Verb) => v.infinitive !== action.payload
+      );
+
+      if (favoriteVerbs) {
+        storage.setItem("favoriteVerbs", favoriteVerbs);
+        state.favoriteVerbs = favoriteVerbs;
+      }
+    },
   },
 });
 
-export const { toggleCorrectValue, addVerbsToStudy, calculateResults } =
-  verbSlice.actions;
+export const {
+  toggleCorrectValue,
+  addVerbsToStudy,
+  calculateResults,
+  addFavoriteVerb,
+  removeFavoriteVerb,
+} = verbSlice.actions;
 
 export default verbSlice.reducer;
 
 export const selectSelectedVerbs = (state: RootState) =>
   state.verb.selectedVerbs;
 export const selectLearnedVerbs = (state: RootState) => state.verb.learnedVerbs;
-
+export const selectFavoriteVerbs = (state: RootState) =>
+  state.verb.favoriteVerbs;
 export const selectResults = (state: RootState) => state.verb.results;

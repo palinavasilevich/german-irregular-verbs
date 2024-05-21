@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import ThemeSwitcher from "../themeSwitcher";
+import ThemeSwitcher from "@/components/themeSwitcher";
 import Logo from "../logo";
 import Navbar from "../navbar";
 import MobileNavbar from "../navbar/mobileNavbar";

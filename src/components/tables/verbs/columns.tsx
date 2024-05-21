@@ -1,23 +1,23 @@
 "use client";
 
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ColumnDef, FilterFn } from "@tanstack/react-table";
 
-import { MoreHorizontal } from "lucide-react";
+import { Star } from "lucide-react";
 import { CaretSortIcon } from "@radix-ui/react-icons";
+
+import {
+  addFavoriteVerb,
+  removeFavoriteVerb,
+  selectFavoriteVerbs,
+} from "@/lib/redux/features/verb.slice";
+
+import MultiSelect from "@/components/multiSelect";
 
 export type Verb = {
   infinitive: string;
@@ -25,6 +25,16 @@ export type Verb = {
   pastParticle: string;
   translation: string;
   group: string;
+};
+
+const selectFilterFn: FilterFn<any> = (row, columnId, value, addMeta) => {
+  if (value === undefined) {
+    return false;
+  } else {
+    if (value.length === 0) return true;
+
+    return value.includes(row.original.group);
+  }
 };
 
 export const columns: ColumnDef<Verb>[] = [
@@ -56,7 +66,7 @@ export const columns: ColumnDef<Verb>[] = [
       return (
         <Button
           variant="ghost"
-          className="text-base font-bold capitalize p-0 m-0"
+          className="text-base font-bold capitalize p-0 m-0 hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Infinitiv
@@ -85,40 +95,48 @@ export const columns: ColumnDef<Verb>[] = [
   },
   {
     accessorKey: "group",
-    header: ({ table }) => {
-      const groups = [...new Set(table.options.data.map((item) => item.group))];
-      return (
-        <Select
-          onValueChange={(value: string) => {
-            table.getColumn("group")?.setFilterValue(value);
-          }}
-        >
-          <SelectTrigger className="w-[100px] border-none outline-none text-base font-bold capitalize">
-            <SelectValue placeholder="Group" />
-          </SelectTrigger>
-          <SelectContent>
-            {groups.map((group) => (
-              <SelectItem key={group} value={group} className="cursor-pointer">
-                {group}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      );
+    header: "Group",
+    filterFn: selectFilterFn,
+    meta: {
+      filterComponent: MultiSelect,
     },
   },
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      const verb = row.original;
+      const favoriteVerbs = useSelector(selectFavoriteVerbs);
+      const dispatch = useDispatch();
+
+      const [isFavoriteVerb, setIsFavoriteVerb] = useState(
+        !!favoriteVerbs?.find((v: Verb) => v.infinitive === verb.infinitive)
+      );
+
+      const handleAddFavoriteVerb = () => {
+        dispatch(addFavoriteVerb(verb.infinitive));
+        setIsFavoriteVerb(true);
+      };
+
+      const handleRemoveFavoriteVerb = () => {
+        dispatch(removeFavoriteVerb(verb.infinitive));
+        setIsFavoriteVerb(false);
+      };
+
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-        </DropdownMenu>
+        <Button
+          variant="ghost"
+          onClick={
+            isFavoriteVerb ? handleRemoveFavoriteVerb : handleAddFavoriteVerb
+          }
+          className="h-8 w-8 p-0"
+        >
+          {isFavoriteVerb ? (
+            <Star className="h-4 w-4 fill-violet-700 " />
+          ) : (
+            <Star className="h-4 w-4" />
+          )}
+        </Button>
       );
     },
   },

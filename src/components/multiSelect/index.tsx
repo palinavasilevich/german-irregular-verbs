@@ -23,7 +23,7 @@ const MultiSelect = ({
   table: Table<any>;
 }) => {
   const columnFilterValue = column.getFilterValue();
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<any[]>([]);
 
   const options = useMemo(() => {
     const options = new Set();
@@ -74,7 +74,7 @@ const MultiSelect = ({
             All
           </DropdownMenuCheckboxItem>
 
-          {options.map((option: string) => (
+          {options.map((option: any) => (
             <DropdownMenuCheckboxItem
               className="cursor-pointer"
               key={option}

@@ -28,7 +28,7 @@ const Hero = () => {
           </div>
           <div className="hidden xl:flex">
             <div className="w-[450px] h-[400px] bg-no-repeat relative bg-bottom">
-              <Image src="/hero/hero.png" fill priority alt="hero_image" />
+              <Image src="/hero/hero.svg" fill priority alt="hero_image" />
             </div>
           </div>
         </div>

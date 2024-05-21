@@ -32,7 +32,7 @@ const MultiSelect = ({
       options.add(label);
     });
     return [...options.values()];
-  }, [column.id, table.getPreFilteredRowModel()]);
+  }, [column.id, table.getPreFilteredRowModel(), table]);
 
   const handleCheckedChange = (option: string) => {
     if (option.toLowerCase() === "all") {

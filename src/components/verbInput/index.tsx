@@ -71,4 +71,6 @@ const VerbInput = forwardRef<HTMLTableSectionElement, VerbInputPropsType>(
   }
 );
 
+VerbInput.displayName = "VerbInput";
+
 export default VerbInput;

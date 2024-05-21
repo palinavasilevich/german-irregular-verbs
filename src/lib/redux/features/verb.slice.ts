@@ -13,7 +13,7 @@ type InitialState = {
   verbs: Verb[] | null;
   selectedVerbs: Verb[] | null;
   learnedVerbs: LearnedVerb[] | null;
-  favoriteVerbs: Verb[] | null;
+  favoriteVerbs: Verb[] | [];
   results: {
     numberOfCorrectAnswers: number;
     numberOfIncorrectAnswers: number;
@@ -61,7 +61,7 @@ export const verbSlice = createSlice({
   name: "verb",
   initialState,
   reducers: {
-    addVerbsToStudy: (state, action: PayloadAction<Verb[]>) => {
+    addVerbsToStudy: (state, action: PayloadAction<any[]>) => {
       const selectedVerbs = action.payload;
       storage.setItem("selectedVerbs", selectedVerbs);
       state.selectedVerbs = selectedVerbs;

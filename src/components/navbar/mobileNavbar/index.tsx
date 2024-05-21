@@ -21,12 +21,8 @@ const MobileNavbar = () => {
             <Logo />
             <nav className="flex flex-col items-center gap-y-6">
               {links.map((link) => (
-                <SheetClose asChild>
-                  <Link
-                    href={link.path}
-                    key={link.title}
-                    className="capitalize text-2xl"
-                  >
+                <SheetClose asChild key={link.title}>
+                  <Link href={link.path} className="capitalize text-2xl">
                     {link.title}
                   </Link>
                 </SheetClose>

@@ -104,6 +104,13 @@ export const columns: ColumnDef<Verb>[] = [
   {
     id: "actions",
     enableHiding: false,
+    cell: ({ row }) => {
+      return (
+        <Button variant="ghost" className="h-8 w-8 p-0">
+          <Star className="h-4 w-4" />
+        </Button>
+      );
+    },
     // cell: ({ row }) => {
     //   const verb = row.original;
     //   const favoriteVerbs = useSelector(selectFavoriteVerbs);

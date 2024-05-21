@@ -8,7 +8,7 @@ import { NUMBER_OF_ATTEMPTS_TO_ENTER_VERB } from "@/constants";
 import { Table, Row, Column } from "@tanstack/react-table";
 import { useDispatch } from "react-redux";
 import { toggleCorrectValue } from "@/lib/redux/features/verb.slice";
-interface WordInputPropsType
+interface VerbInputPropsType
   extends React.InputHTMLAttributes<HTMLInputElement> {
   table: Table<any>;
   row: Row<any>;
@@ -16,7 +16,7 @@ interface WordInputPropsType
   getValue: () => any;
 }
 
-const WordInput = forwardRef<HTMLTableSectionElement, WordInputPropsType>(
+const VerbInput = forwardRef<HTMLTableSectionElement, VerbInputPropsType>(
   ({ getValue, row, column, table }, ref) => {
     const correctValue = getValue();
     const columnMeta = column.columnDef.meta;
@@ -71,4 +71,4 @@ const WordInput = forwardRef<HTMLTableSectionElement, WordInputPropsType>(
   }
 );
 
-export default WordInput;
+export default VerbInput;

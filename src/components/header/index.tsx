@@ -1,25 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ThemeSwitcher from "@/components/themeSwitcher";
 import Logo from "../logo";
 import Navbar from "../navbar";
 import MobileNavbar from "../navbar/mobileNavbar";
 
 const Header = () => {
-  const [header, setHeader] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    const scroll = window.scrollY;
+    scroll <= 50 ? setIsVisible(true) : setIsVisible(false);
+  }, [isVisible]);
 
   useEffect(() => {
-    const scrollYPos = window.addEventListener("scroll", () => {
-      window.scrollY > 50 ? setHeader(true) : setHeader(false);
-    });
-
-    return () => window.removeEventListener("scroll", scrollYPos);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   });
 
   return (
     <header
-      className={`${header && " bg-white shadow-lg dark:bg-accent"}
+      className={`${isVisible && " bg-white shadow-lg dark:bg-accent"}
       py-4  sticky top-0 z-30 transition-all"}`}
     >
       <div className="container mx-auto">

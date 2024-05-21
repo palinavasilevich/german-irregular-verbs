@@ -37,7 +37,7 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
             <AlertDialogTitle>Gut gemacht!</AlertDialogTitle>
             <AlertDialogDescription>
               <div>Errors: {numberOfIncorrectAnswers}</div>
-              <div>{`Success: ${percentageOfCorrectAnswers.toFixed(2)}%`}</div>
+              <div>{`Success: ${percentageOfCorrectAnswers}%`}</div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

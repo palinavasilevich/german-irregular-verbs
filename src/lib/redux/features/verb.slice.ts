@@ -86,8 +86,10 @@ export const verbSlice = createSlice({
       const numberOfIncorrectAnswers =
         numberOfAllVerbs - numberOfCorrectAnswers;
 
-      const percentageOfCorrectAnswers =
-        (numberOfCorrectAnswers * 100) / numberOfAllVerbs;
+      const percentageOfCorrectAnswers = +(
+        (numberOfCorrectAnswers * 100) /
+        numberOfAllVerbs
+      ).toFixed(2);
 
       state.results = {
         numberOfCorrectAnswers,

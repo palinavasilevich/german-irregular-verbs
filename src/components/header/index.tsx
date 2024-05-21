@@ -11,7 +11,7 @@ const Header = () => {
 
   const handleScroll = useCallback(() => {
     const scroll = window.scrollY;
-    scroll <= 50 ? setIsVisible(true) : setIsVisible(false);
+    scroll > 50 ? setIsVisible(true) : setIsVisible(false);
   }, [isVisible]);
 
   useEffect(() => {

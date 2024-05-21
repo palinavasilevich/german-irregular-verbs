@@ -7,7 +7,7 @@ export async function getLocalData() {
   // Read the json file
   const jsonData = await fsPromises.readFile(filePath);
   // Parse data as json
-  const objectData = JSON.parse(jsonData);
+  const objectData = JSON.parse(jsonData.toString());
 
   return objectData;
 }

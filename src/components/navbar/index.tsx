@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
-const links = [
+export const links = [
   {
     title: "home",
     path: "/",
@@ -23,6 +23,7 @@ const Navbar = ({
   containerStyles,
   linkStyles,
   underlineStyles,
+  ...restProps
 }: {
   containerStyles?: string;
   linkStyles?: string;
@@ -37,6 +38,7 @@ const Navbar = ({
           href={link.path}
           key={link.title}
           className={cn("capitalize", linkStyles)}
+          {...restProps}
         >
           {link.path === path && (
             <motion.span
@@ -44,7 +46,7 @@ const Navbar = ({
               animate={{ y: 0 }}
               transition={{ type: "tween" }}
               layoutId="underline"
-              className={underlineStyles}
+              className={`${underlineStyles}`}
             />
           )}
           {link.title}

@@ -1,7 +1,13 @@
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
 import { AlignJustify } from "lucide-react";
-import Navbar from "..";
+import Navbar, { links } from "..";
 import Logo from "@/components/logo";
+import Link from "next/link";
 
 const MobileNavbar = () => {
   return (
@@ -13,10 +19,19 @@ const MobileNavbar = () => {
         <div className="flex flex-col items-center">
           <div className="flex flex-col items-center gap-y-6">
             <Logo />
-            <Navbar
-              containerStyles="flex flex-col items-center gap-y-6"
-              linkStyles="text-2xl"
-            />
+            <nav className="flex flex-col items-center gap-y-6">
+              {links.map((link) => (
+                <SheetClose asChild>
+                  <Link
+                    href={link.path}
+                    key={link.title}
+                    className="capitalize text-2xl"
+                  >
+                    {link.title}
+                  </Link>
+                </SheetClose>
+              ))}
+            </nav>
           </div>
         </div>
       </SheetContent>

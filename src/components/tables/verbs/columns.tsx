@@ -104,40 +104,40 @@ export const columns: ColumnDef<Verb>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
-      const verb = row.original;
-      const favoriteVerbs = useSelector(selectFavoriteVerbs);
-      const dispatch = useDispatch();
+    // cell: ({ row }) => {
+    //   const verb = row.original;
+    //   const favoriteVerbs = useSelector(selectFavoriteVerbs);
+    //   const dispatch = useDispatch();
 
-      const [isFavoriteVerb, setIsFavoriteVerb] = useState(
-        !!favoriteVerbs?.find((v: Verb) => v.infinitive === verb.infinitive)
-      );
+    //   const [isFavoriteVerb, setIsFavoriteVerb] = useState(
+    //     !!favoriteVerbs?.find((v: Verb) => v.infinitive === verb.infinitive)
+    //   );
 
-      const handleAddFavoriteVerb = () => {
-        dispatch(addFavoriteVerb(verb.infinitive));
-        setIsFavoriteVerb(true);
-      };
+    //   const handleAddFavoriteVerb = () => {
+    //     dispatch(addFavoriteVerb(verb.infinitive));
+    //     setIsFavoriteVerb(true);
+    //   };
 
-      const handleRemoveFavoriteVerb = () => {
-        dispatch(removeFavoriteVerb(verb.infinitive));
-        setIsFavoriteVerb(false);
-      };
+    //   const handleRemoveFavoriteVerb = () => {
+    //     dispatch(removeFavoriteVerb(verb.infinitive));
+    //     setIsFavoriteVerb(false);
+    //   };
 
-      return (
-        <Button
-          variant="ghost"
-          onClick={
-            isFavoriteVerb ? handleRemoveFavoriteVerb : handleAddFavoriteVerb
-          }
-          className="h-8 w-8 p-0"
-        >
-          {isFavoriteVerb ? (
-            <Star className="h-4 w-4 fill-violet-700 " />
-          ) : (
-            <Star className="h-4 w-4" />
-          )}
-        </Button>
-      );
-    },
+    //   return (
+    //     <Button
+    //       variant="ghost"
+    //       onClick={
+    //         isFavoriteVerb ? handleRemoveFavoriteVerb : handleAddFavoriteVerb
+    //       }
+    //       className="h-8 w-8 p-0"
+    //     >
+    //       {isFavoriteVerb ? (
+    //         <Star className="h-4 w-4 fill-violet-700 " />
+    //       ) : (
+    //         <Star className="h-4 w-4" />
+    //       )}
+    //     </Button>
+    //   );
+    // },
   },
 ];

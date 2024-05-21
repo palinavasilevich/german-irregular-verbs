@@ -12,11 +12,11 @@ interface VerbInputPropsType
   extends React.InputHTMLAttributes<HTMLInputElement> {
   table: Table<any>;
   row: Row<any>;
-  column: Column<any>;
+  column: any;
   getValue: () => any;
 }
 
-const VerbInput = forwardRef<HTMLTableSectionElement, VerbInputPropsType>(
+const VerbInput = forwardRef<any, VerbInputPropsType>(
   ({ getValue, row, column, table }, ref) => {
     const correctValue = getValue();
     const columnMeta = column.columnDef.meta;
@@ -38,13 +38,13 @@ const VerbInput = forwardRef<HTMLTableSectionElement, VerbInputPropsType>(
       if (e.key === "Enter") {
         if (value.trim() !== correctValue) {
           if (numberOfAttempts - 1 === 0) {
-            tableMeta.goToNextInput(currentInputIndex);
+            tableMeta?.goToNextInput(currentInputIndex);
           }
           setNumberOfAttempts(numberOfAttempts - 1);
         } else {
           setIsCorrectAnswer(true);
           dispatch(toggleCorrectValue({ id: correctValue }));
-          tableMeta.goToNextInput(currentInputIndex);
+          tableMeta?.goToNextInput(currentInputIndex);
         }
       }
     };

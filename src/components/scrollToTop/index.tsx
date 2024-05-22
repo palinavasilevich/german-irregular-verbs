@@ -29,7 +29,7 @@ const ScrollToTop = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-10 cursor-pointer">
+    <div className="fixed bottom-4 right-1 xl:right-10 cursor-pointer">
       {isVisible && (
         <Button onClick={scrollToTop} size="icon">
           <ChevronUpIcon className="h-5 w-5" />

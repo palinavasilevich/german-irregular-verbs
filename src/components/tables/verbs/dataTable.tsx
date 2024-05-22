@@ -87,7 +87,6 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full space-y-2.5 overflow-auto">
-      <ScrollToTop />
       <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Search verb..."
@@ -168,6 +167,7 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+        <ScrollToTop />
       </div>
     </div>
   );

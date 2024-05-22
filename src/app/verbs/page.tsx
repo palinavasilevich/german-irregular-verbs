@@ -11,7 +11,7 @@ export default async function Verbs() {
 
   return (
     <section className="grid items-center pb-8 pt-6 md:py-8 container gap-2">
-      <div className="container mx-auto">
+      <div>
         <h2 className="section-title mb-8 xl:mb:16 text-center mx-auto">
           German Irregular Verbs
         </h2>

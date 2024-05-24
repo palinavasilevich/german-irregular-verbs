@@ -5,7 +5,7 @@ import { KeyboardEvent, ChangeEvent, useState, forwardRef } from "react";
 import { Input } from "../ui/input";
 import { NUMBER_OF_ATTEMPTS_TO_ENTER_VERB } from "@/constants";
 
-import { Table, Row, Column } from "@tanstack/react-table";
+import { Table, Row } from "@tanstack/react-table";
 import { useDispatch } from "react-redux";
 import { toggleCorrectValue } from "@/lib/redux/features/verb.slice";
 interface VerbInputPropsType
@@ -35,7 +35,7 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
       setValue(e.target.value);
 
     const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13) {
+      if (e.keyCode === 13 || e.keyCode === 229) {
         if (value.trim() !== correctValue) {
           if (numberOfAttempts - 1 === 0) {
             tableMeta?.goToNextInput(currentInputIndex);

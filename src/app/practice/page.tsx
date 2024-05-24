@@ -11,7 +11,7 @@ const PracticePage = () => {
 
   return (
     <section className="grid items-center pb-8 pt-6 md:py-8 container gap-2">
-      <div className="w-full overflow-auto">
+      <div className="w-full overflow-hidden">
         <h2 className="section-title mb-8 text-center mx-auto">
           German Irregular Verbs
         </h2>

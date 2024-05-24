@@ -34,23 +34,10 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
     const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
       setValue(e.target.value);
 
-    const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13) {
-        if (value.trim() !== correctValue) {
-          if (numberOfAttempts - 1 === 0) {
-            tableMeta?.goToNextInput(currentInputIndex);
-          }
-          setNumberOfAttempts(numberOfAttempts - 1);
-        } else {
-          setIsCorrectAnswer(true);
-          dispatch(toggleCorrectValue({ id: correctValue }));
-          tableMeta?.goToNextInput(currentInputIndex);
-        }
-      }
-    };
-
-    const handleBlur = () => {
-      if (value.trim() !== correctValue) {
+    const checkAnswer = () => {
+      if (
+        value.trim().toLocaleLowerCase() !== correctValue.toLocaleLowerCase()
+      ) {
         if (numberOfAttempts - 1 === 0) {
           tableMeta?.goToNextInput(currentInputIndex);
         }
@@ -59,6 +46,18 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
         setIsCorrectAnswer(true);
         dispatch(toggleCorrectValue({ id: correctValue }));
         tableMeta?.goToNextInput(currentInputIndex);
+      }
+    };
+
+    const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.code === "Enter") {
+        checkAnswer();
+      }
+    };
+
+    const handleBlur = () => {
+      if (value.trim() !== "") {
+        checkAnswer();
       }
     };
 

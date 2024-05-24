@@ -66,7 +66,7 @@ export const columns: ColumnDef<Verb>[] = [
       return (
         <Button
           variant="ghost"
-          className="text-base font-bold capitalize p-0 m-0 hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0"
+          className="text-sm md:text-base font-bold capitalize p-0 m-0 hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Infinitiv
@@ -78,19 +78,19 @@ export const columns: ColumnDef<Verb>[] = [
   {
     accessorKey: "pastSimple",
     header: () => (
-      <div className="text-base font-bold capitalize">Präteritum</div>
+      <div className="md:text-base font-bold capitalize">Präteritum</div>
     ),
   },
   {
     accessorKey: "pastParticle",
     header: () => (
-      <div className="text-base font-bold capitalize">Partizip II</div>
+      <div className="md:text-base font-bold capitalize">Partizip II</div>
     ),
   },
   {
     accessorKey: "translation",
     header: () => (
-      <div className="text-base font-bold capitalize">Übersetzung</div>
+      <div className="md:text-base font-bold capitalize">Übersetzung</div>
     ),
   },
   {

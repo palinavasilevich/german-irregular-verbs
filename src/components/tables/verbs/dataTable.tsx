@@ -96,14 +96,14 @@ export function DataTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("infinitive")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm mr-4"
+          className="max-w-sm"
         />
         {table.getFilteredSelectedRowModel().rows.length > 0 && (
           <Button
             variant="outline"
             size="sm"
             onClick={onClickAddVerbsToStudy}
-            className="h-10"
+            className="h-10 ml-4"
           >
             <RocketIcon className="mr-2 size-4" aria-hidden="true" />
             {`Study ${table.getFilteredSelectedRowModel().rows.length} ${

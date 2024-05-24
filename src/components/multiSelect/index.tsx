@@ -59,7 +59,7 @@ const MultiSelect = ({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="text-base font-bold capitalize p-0 m-0 hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0"
+          className="text-sm md:text-base font-bold capitalize p-0 m-0 hover:bg-transparent focus-visible:ring-offset-0 focus-visible:ring-0"
         >
           Groups <ChevronDownIcon className="ml-2 h-4 w-4" />
         </Button>

@@ -67,7 +67,7 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
         onChange={handleChange}
         onKeyDown={handleKeydown}
         onBlur={handleBlur}
-        className={`w-[70px] sm:w-full lg:w-[200px] border-dashed border-gray-500 !ring-transparent focus-visible:border-violet-700 text-base ${
+        className={`w-[150px] lg:w-[200px] border-dashed border-gray-500 !ring-transparent focus-visible:border-violet-700 text-base ${
           numberOfAttempts < NUMBER_OF_ATTEMPTS_TO_ENTER_VERB
             ? "border-rose-500"
             : ""

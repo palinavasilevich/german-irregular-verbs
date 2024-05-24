@@ -9,7 +9,9 @@ import VerbInput from "@/components/verbInput";
 export const columns: ColumnDef<Verb>[] = [
   ...HEADERS.map(({ accessorKey, title }, index) => ({
     accessorKey,
-    header: () => <div className="text-base font-bold capitalize">{title}</div>,
+    header: () => (
+      <div className="text-sm md:text-base font-bold capitalize">{title}</div>
+    ),
     cell: VerbInput,
     meta: {
       cellIndex: index,
@@ -18,7 +20,9 @@ export const columns: ColumnDef<Verb>[] = [
   {
     accessorKey: "translation",
     header: () => (
-      <div className="text-base font-bold capitalize">übersetzung</div>
+      <div className="text-sm md:text-base font-bold capitalize">
+        übersetzung
+      </div>
     ),
   },
 ];

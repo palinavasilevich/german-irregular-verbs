@@ -35,7 +35,7 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
       setValue(e.target.value);
 
     const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.keyCode === 13 || e.keyCode === 229) {
+      if (e.keyCode === 13) {
         if (value.trim() !== correctValue) {
           if (numberOfAttempts - 1 === 0) {
             tableMeta?.goToNextInput(currentInputIndex);
@@ -49,11 +49,25 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
       }
     };
 
+    const handleBlur = () => {
+      if (value.trim() !== correctValue) {
+        if (numberOfAttempts - 1 === 0) {
+          tableMeta?.goToNextInput(currentInputIndex);
+        }
+        setNumberOfAttempts(numberOfAttempts - 1);
+      } else {
+        setIsCorrectAnswer(true);
+        dispatch(toggleCorrectValue({ id: correctValue }));
+        tableMeta?.goToNextInput(currentInputIndex);
+      }
+    };
+
     return (
       <Input
         value={numberOfAttempts === 0 ? correctValue : value}
         onChange={handleChange}
         onKeyDown={handleKeydown}
+        onBlur={handleBlur}
         className={`w-[70px] sm:w-full lg:w-[200px] border-dashed border-gray-500 !ring-transparent focus-visible:border-violet-700 text-base ${
           numberOfAttempts < NUMBER_OF_ATTEMPTS_TO_ENTER_VERB
             ? "border-rose-500"

@@ -46,6 +46,7 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
               All verbs
             </AlertDialogAction>
             <AlertDialogAction
+              className="mb-4"
               onClick={() => {
                 window.location.reload();
                 // refresh();

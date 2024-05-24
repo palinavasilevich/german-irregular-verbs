@@ -35,7 +35,7 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
       setValue(e.target.value);
 
     const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter") {
+      if (e.keyCode === 13) {
         if (value.trim() !== correctValue) {
           if (numberOfAttempts - 1 === 0) {
             tableMeta?.goToNextInput(currentInputIndex);
@@ -54,7 +54,7 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
         value={numberOfAttempts === 0 ? correctValue : value}
         onChange={handleChange}
         onKeyDown={handleKeydown}
-        className={`w-[200px] border-dashed border-gray-500 !ring-transparent focus-visible:border-violet-700 text-base ${
+        className={`w-[70px] sm:w-full lg:w-[200px] border-dashed border-gray-500 !ring-transparent focus-visible:border-violet-700 text-base ${
           numberOfAttempts < NUMBER_OF_ATTEMPTS_TO_ENTER_VERB
             ? "border-rose-500"
             : ""

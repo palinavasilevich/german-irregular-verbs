@@ -38,15 +38,13 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
       if (
         value.trim().toLocaleLowerCase() !== correctValue.toLocaleLowerCase()
       ) {
-        if (numberOfAttempts - 1 === 0) {
-          tableMeta?.goToNextInput(currentInputIndex);
-        }
-        setNumberOfAttempts(numberOfAttempts - 1);
+        setNumberOfAttempts(0);
       } else {
         setIsCorrectAnswer(true);
         dispatch(toggleCorrectValue({ id: correctValue }));
-        tableMeta?.goToNextInput(currentInputIndex);
       }
+
+      tableMeta?.goToNextInput(currentInputIndex);
     };
 
     const handleKeydown = (e: KeyboardEvent<HTMLInputElement>) => {

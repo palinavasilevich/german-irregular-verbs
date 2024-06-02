@@ -1,28 +1,26 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { columns } from "./columns";
 import { DataTable } from "./dataTable";
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
-import { selectResults } from "@/lib/redux/features/verb.slice";
+import FeedbackDialog from "@/components/feedback/feedbackDialog";
+import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { addVerbsToStudy } from "@/lib/redux/features/verb.slice";
 
 const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
-  const { push, refresh } = useRouter();
 
-  const { numberOfIncorrectAnswers, percentageOfCorrectAnswers } =
-    useSelector(selectResults);
+  const pathname = usePathname();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (pathname === "/learn-random-verbs") {
+      dispatch(addVerbsToStudy(verbs));
+    }
+  }, []);
 
   return (
     <>
@@ -31,32 +29,10 @@ const PracticeVerbsTable = ({ verbs }: { verbs: any }) => {
         data={verbs}
         setIsOpenDialog={setIsOpenDialog}
       />
-      <AlertDialog open={isOpenDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Gut gemacht!</AlertDialogTitle>
-            <AlertDialogDescription>
-              <div>Errors: {numberOfIncorrectAnswers}</div>
-              <div>{`Success: ${percentageOfCorrectAnswers}%`}</div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            {/* <AlertDialogCancel>Cancel</AlertDialogCancel> */}
-            <AlertDialogAction onClick={() => push("/verbs")}>
-              All verbs
-            </AlertDialogAction>
-            <AlertDialogAction
-              className="mb-4"
-              onClick={() => {
-                window.location.reload();
-                // refresh();
-              }}
-            >
-              Learn verbs again
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <FeedbackDialog
+        isOpenDialog={isOpenDialog}
+        setIsOpenDialog={setIsOpenDialog}
+      />
     </>
   );
 };

@@ -7,7 +7,8 @@ import { NUMBER_OF_ATTEMPTS_TO_ENTER_VERB } from "@/constants";
 
 import { Table, Row } from "@tanstack/react-table";
 import { useDispatch } from "react-redux";
-import { toggleCorrectValue } from "@/lib/redux/features/verb.slice";
+import { markCorrectAnswer } from "@/lib/redux/features/verb.slice";
+
 interface VerbInputPropsType
   extends React.InputHTMLAttributes<HTMLInputElement> {
   table: Table<any>;
@@ -41,7 +42,7 @@ const VerbInput = forwardRef<any, VerbInputPropsType>(
         setNumberOfAttempts(0);
       } else {
         setIsCorrectAnswer(true);
-        dispatch(toggleCorrectValue({ id: correctValue }));
+        dispatch(markCorrectAnswer(correctValue));
       }
 
       tableMeta?.goToNextInput(currentInputIndex);

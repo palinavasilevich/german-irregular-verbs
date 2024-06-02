@@ -1,6 +1,8 @@
 import MainSection from "@/components/mainSection";
-import AllVerbsTable from "@/components/tables/verbs/allVerbsTable";
-import { getLocalData } from "@/lib/getLocalData";
+import { AllVerbsTable } from "@/components/tables/verbs/allVerbsTable";
+import { columns } from "@/components/tables/verbs/columns";
+
+import { getLocalData } from "@/utils/getLocalData";
 
 async function getData() {
   const data = getLocalData();
@@ -12,7 +14,9 @@ export default async function Verbs() {
 
   return (
     <MainSection>
-      <AllVerbsTable verbs={verbs} />
+      {verbs && verbs.length > 0 && (
+        <AllVerbsTable data={verbs} columns={columns} verbs={verbs} />
+      )}
     </MainSection>
   );
 }

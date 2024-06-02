@@ -6,6 +6,7 @@ export const storage = {
       localStorage.setItem(name, JSON.stringify(item));
     }
   },
+
   getItem: (name: string) => {
     if (typeof window !== "undefined") {
       const item = localStorage.getItem(name);
@@ -13,6 +14,12 @@ export const storage = {
       if (item) {
         return JSON.parse(item);
       }
+    }
+  },
+
+  removeItem: (name: string) => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem(name);
     }
   },
 };

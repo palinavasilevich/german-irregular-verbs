@@ -16,8 +16,7 @@ type InitialState = {
   favoriteVerbs: Verb[] | [];
   results: {
     numberOfCorrectAnswers: number;
-    numberOfIncorrectAnswers: number;
-    percentageOfCorrectAnswers: number;
+    numberOfAllVerbs: number;
   };
 };
 
@@ -28,20 +27,8 @@ enum Fields {
 }
 
 const initialSelectedVerbs = storage.getItem("selectedVerbs") || null;
-let initialLearnedVerbs = null;
-
-if (initialSelectedVerbs) {
-  initialLearnedVerbs = [];
-  initialSelectedVerbs.map((verb: Verb) => {
-    for (const [key, value] of Object.entries(verb)) {
-      if (key in Fields) {
-        initialLearnedVerbs.push({ id: value, isCorrectValue: false });
-      }
-    }
-  });
-}
-
-const initialFavoriteVerbs = storage.getItem("favoriteVerbs") || null;
+const initialLearnedVerbs = storage.getItem("learnedVerbs") || null;
+const initialFavoriteVerbs = storage.getItem("favoriteVerbs") || [];
 
 const initialVerbs = storage.getItem("verbs") || null;
 
@@ -52,8 +39,7 @@ const initialState = {
   favoriteVerbs: initialFavoriteVerbs,
   results: {
     numberOfCorrectAnswers: 0,
-    numberOfIncorrectAnswers: 0,
-    percentageOfCorrectAnswers: 0,
+    numberOfAllVerbs: 0,
   },
 } as InitialState;
 
@@ -61,15 +47,42 @@ export const verbSlice = createSlice({
   name: "verb",
   initialState,
   reducers: {
-    addVerbsToStudy: (state, action: PayloadAction<any[]>) => {
-      const selectedVerbs = action.payload;
-      storage.setItem("selectedVerbs", selectedVerbs);
-      state.selectedVerbs = selectedVerbs;
+    addVerbs: (state, action: PayloadAction<Verb[]>) => {
+      const verbs = action.payload;
+      state.verbs = verbs;
+
+      storage.setItem("verbs", verbs);
     },
 
-    toggleCorrectValue: (state, action: PayloadAction<{ id: string }>) => {
+    removeSelectedVerbs: (state) => {
+      state.selectedVerbs = null;
+      storage.removeItem("selectedVerbs");
+      state.learnedVerbs = null;
+      storage.removeItem("learnedVerbs");
+    },
+
+    addVerbsToStudy: (state, action: PayloadAction<any[]>) => {
+      const selectedVerbs = action.payload;
+      state.selectedVerbs = selectedVerbs;
+      storage.setItem("selectedVerbs", selectedVerbs);
+
+      const newLearnedVerbs: LearnedVerb[] = [];
+
+      selectedVerbs?.map((verb: Verb) => {
+        for (const [key, value] of Object.entries(verb)) {
+          if (key in Fields) {
+            newLearnedVerbs.push({ id: value, isCorrectValue: false });
+          }
+        }
+      });
+      state.learnedVerbs = newLearnedVerbs;
+      storage.setItem("learnedVerbs", newLearnedVerbs);
+    },
+
+    markCorrectAnswer: (state, action: PayloadAction<string>) => {
+      const verbId = action.payload;
       const verb = state.learnedVerbs?.find((v: LearnedVerb) => {
-        return v.id === action.payload.id;
+        return v.id === verbId;
       });
 
       if (verb) {
@@ -83,18 +96,9 @@ export const verbSlice = createSlice({
 
       const numberOfAllVerbs = state.learnedVerbs?.length || 0;
 
-      const numberOfIncorrectAnswers =
-        numberOfAllVerbs - numberOfCorrectAnswers;
-
-      const percentageOfCorrectAnswers = +(
-        (numberOfCorrectAnswers * 100) /
-        numberOfAllVerbs
-      ).toFixed(2);
-
       state.results = {
         numberOfCorrectAnswers,
-        numberOfIncorrectAnswers,
-        percentageOfCorrectAnswers,
+        numberOfAllVerbs,
       };
     },
 
@@ -124,7 +128,9 @@ export const verbSlice = createSlice({
 });
 
 export const {
-  toggleCorrectValue,
+  addVerbs,
+  removeSelectedVerbs,
+  markCorrectAnswer,
   addVerbsToStudy,
   calculateResults,
   addFavoriteVerb,

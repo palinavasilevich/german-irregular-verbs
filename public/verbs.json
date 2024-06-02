@@ -1062,7 +1062,7 @@
       "pastSimple": "hieß",
       "pastParticle": "hat geheißen",
       "translation": "называться",
-      "group": "Special group of verbs I"
+      "group": "XIV"
     },
     {
       "id": "d9d57d60-b3f0-4efe-8818-12934ba3b84c",
@@ -1070,7 +1070,7 @@
       "pastSimple": "lief",
       "pastParticle": "ist gelaufen",
       "translation": "бегать",
-      "group": "Special group of verbs I"
+      "group": "XIV"
     },
     {
       "id": "08bced20-5541-4d47-9223-731966786588",
@@ -1078,7 +1078,7 @@
       "pastSimple": "rief",
       "pastParticle": "hat gerufen",
       "translation": "кричать, звать",
-      "group": "Special group of verbs I"
+      "group": "XIV"
     },
     {
       "id": "12587749-512d-4ccf-a809-347d0959e6ea",
@@ -1086,7 +1086,7 @@
       "pastSimple": "stieß",
       "pastParticle": "hat gestoßen",
       "translation": "толкать",
-      "group": "Special group of verbs I"
+      "group": "XIV"
     },
     {
       "id": "20ba3faa-1ae7-4e2e-90c7-a76798bc0eec",
@@ -1094,7 +1094,7 @@
       "pastSimple": "war",
       "pastParticle": "ist gewesen",
       "translation": "быть",
-      "group": "Special group of verbs II"
+      "group": "special group of verbs"
     },
     {
       "id": "0dc236dd-b3bc-4919-9324-1e16b89baa7e",
@@ -1102,7 +1102,7 @@
       "pastSimple": "hatte",
       "pastParticle": "hat gehabt",
       "translation": "иметь",
-      "group": "Special group of verbs II"
+      "group": "special group of verbs"
     },
     {
       "id": "70f7a35b-d0c9-4d15-a54a-6ebfd4757258",
@@ -1110,7 +1110,7 @@
       "pastSimple": "wurde",
       "pastParticle": "ist geworden",
       "translation": "становиться",
-      "group": "Special group of verbs II"
+      "group": "special group of verbs"
     },
     {
       "id": "56352b00-b185-484c-8ed4-65b604156303",
@@ -1118,7 +1118,7 @@
       "pastSimple": "ging",
       "pastParticle": "ist gegangen",
       "translation": "идти",
-      "group": "Special group of verbs II"
+      "group": "special group of verbs"
     },
     {
       "id": "b6d6b335-b04e-4870-8bc0-8d939a4b780e",
@@ -1126,7 +1126,7 @@
       "pastSimple": "stand",
       "pastParticle": "hat gestanden",
       "translation": "стоять",
-      "group": "Special group of verbs II"
+      "group": "special group of verbs"
     },
     {
       "id": "1714483f-9ca8-4f6c-8d24-336501843b06",
@@ -1134,7 +1134,7 @@
       "pastSimple": "tat",
       "pastParticle": "hat getan",
       "translation": "делать",
-      "group": "Special group of verbs II"
+      "group": "special group of verbs"
     }
   ]
 }

@@ -16,7 +16,7 @@ const FeedbackScore = ({
       </p>
       <div>
         <div className="flex justify-between items-center gap-6 mt-2">
-          <div className="w-full flex justify-between items-center relative">
+          <div className="w-full flex-1 flex justify-between items-center relative">
             <Progress
               className="h-5"
               value={+((numberOfCorrectAnswers * 100) / numberOfAllElements)}
@@ -29,7 +29,7 @@ const FeedbackScore = ({
               }`}
             />
           </div>
-          <span className="w-[16%] text-right text-xl font-bold">
+          <span className="text-right text-xl font-bold">
             {numberOfCorrectAnswers} / {numberOfAllElements}
           </span>
         </div>

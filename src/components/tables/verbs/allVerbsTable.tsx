@@ -28,11 +28,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RocketIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
 
 import ScrollToTop from "@/components/scrollToTop";
 
-import { storage } from "@/utils/storage";
 import { useDispatch } from "react-redux";
 import {
   addVerbs,

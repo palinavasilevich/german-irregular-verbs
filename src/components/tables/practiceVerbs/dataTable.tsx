@@ -142,7 +142,6 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-        <input className="hidden" />
       </div>
     </div>
   );

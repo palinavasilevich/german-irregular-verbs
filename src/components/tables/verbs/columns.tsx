@@ -5,10 +5,11 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 import { ColumnDef, FilterFn } from "@tanstack/react-table";
 
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import { CaretSortIcon, PlayIcon } from "@radix-ui/react-icons";
 
 import MultiSelect from "@/components/multiSelect";
 import FavoriteVerbsCell from "@/components/favoriteVerbsCell";
+import VerbTableCell from "@/components/verbTableCell";
 
 export type Verb = {
   infinitive: string;
@@ -65,18 +66,33 @@ export const columns: ColumnDef<Verb>[] = [
         </Button>
       );
     },
+    cell: ({ row }) => {
+      const verb = row.original.infinitive;
+
+      return <VerbTableCell verb={verb} />;
+    },
   },
   {
     accessorKey: "pastSimple",
     header: () => (
       <div className="md:text-base font-bold capitalize">Präteritum</div>
     ),
+    cell: ({ row }) => {
+      const verb = row.original.pastSimple;
+
+      return <VerbTableCell verb={verb} />;
+    },
   },
   {
     accessorKey: "pastParticle",
     header: () => (
       <div className="md:text-base font-bold capitalize">Partizip II</div>
     ),
+    cell: ({ row }) => {
+      const verb = row.original.pastParticle;
+
+      return <VerbTableCell verb={verb} />;
+    },
   },
   {
     accessorKey: "translation",

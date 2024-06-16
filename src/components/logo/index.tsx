@@ -8,7 +8,13 @@ const Logo = () => {
     <Link href="/">
       <div className={styles.container}>
         <div className={styles.imgContainer}>
-          <Image src="/logo.svg" alt="logo_img" fill />
+          <Image
+            src="/logo.svg"
+            alt="logo_img"
+            fill
+            loading="eager"
+            priority={true}
+          />
         </div>
       </div>
     </Link>

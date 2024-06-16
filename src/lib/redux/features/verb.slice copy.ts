@@ -9,11 +9,12 @@ type LearnedVerb = {
   isCorrectValue: boolean;
 };
 
+export type VerbType = Verb & { isFavoriteVerb: boolean };
+
 type InitialState = {
-  verbs: Verb[] | null;
+  verbs: VerbType[] | null;
   selectedVerbs: Verb[] | null;
   learnedVerbs: LearnedVerb[] | null;
-  favoriteVerbs: Verb[] | [];
   results: {
     numberOfCorrectAnswers: number;
     numberOfAllVerbs: number;
@@ -28,7 +29,6 @@ enum Fields {
 
 const initialSelectedVerbs = storage.getItem("selectedVerbs") || null;
 const initialLearnedVerbs = storage.getItem("learnedVerbs") || null;
-const initialFavoriteVerbs = storage.getItem("favoriteVerbs") || [];
 
 const initialVerbs = storage.getItem("verbs") || null;
 
@@ -36,7 +36,6 @@ const initialState = {
   verbs: initialVerbs,
   selectedVerbs: initialSelectedVerbs,
   learnedVerbs: initialLearnedVerbs,
-  favoriteVerbs: initialFavoriteVerbs,
   results: {
     numberOfCorrectAnswers: 0,
     numberOfAllVerbs: 0,
@@ -47,11 +46,13 @@ export const verbSlice = createSlice({
   name: "verb",
   initialState,
   reducers: {
-    addVerbs: (state, action: PayloadAction<Verb[]>) => {
-      const verbs = action.payload;
-      state.verbs = verbs;
+    addVerbs: (state, action: PayloadAction<VerbType[]>) => {
+      if (!initialVerbs) {
+        const verbs = action.payload;
 
-      storage.setItem("verbs", verbs);
+        state.verbs = verbs;
+        storage.setItem("verbs", verbs);
+      }
     },
 
     removeSelectedVerbs: (state) => {
@@ -102,43 +103,20 @@ export const verbSlice = createSlice({
       };
     },
 
-    // toggleFavoriteVerb: (state, action: PayloadAction<string>) => {
-    //   const updatedVerbs = state.verbs?.map((verb: VerbType) => {
-    //     if (verb.infinitive === action.payload) {
-    //       return {
-    //         ...verb,
-    //         isFavoriteVerb: !verb.isFavoriteVerb,
-    //       };
-    //     }
-    //     return verb;
-    //   });
-
-    //   if (updatedVerbs) {
-    //     state.verbs = updatedVerbs;
-    //     storage.setItem("verbs", updatedVerbs);
-    //   }
-    // },
-
-    addFavoriteVerb: (state, action: PayloadAction<string>) => {
-      const verb = state.verbs?.find((v: Verb) => {
-        return v.infinitive === action.payload;
+    toggleFavoriteVerb: (state, action: PayloadAction<string>) => {
+      const updatedVerbs = state.verbs?.map((verb: VerbType) => {
+        if (verb.infinitive === action.payload) {
+          return {
+            ...verb,
+            isFavoriteVerb: !verb.isFavoriteVerb,
+          };
+        }
+        return verb;
       });
 
-      if (verb) {
-        const favoriteVerbs = [...state.favoriteVerbs, verb];
-        storage.setItem("favoriteVerbs", favoriteVerbs);
-        state.favoriteVerbs = favoriteVerbs;
-      }
-    },
-
-    removeFavoriteVerb: (state, action: PayloadAction<string>) => {
-      const favoriteVerbs = state.favoriteVerbs?.filter(
-        (v: Verb) => v.infinitive !== action.payload
-      );
-
-      if (favoriteVerbs) {
-        storage.setItem("favoriteVerbs", favoriteVerbs);
-        state.favoriteVerbs = favoriteVerbs;
+      if (updatedVerbs) {
+        state.verbs = updatedVerbs;
+        storage.setItem("verbs", updatedVerbs);
       }
     },
   },
@@ -150,8 +128,7 @@ export const {
   markCorrectAnswer,
   addVerbsToStudy,
   calculateResults,
-  addFavoriteVerb,
-  removeFavoriteVerb,
+  toggleFavoriteVerb,
 } = verbSlice.actions;
 
 export default verbSlice.reducer;
@@ -159,6 +136,4 @@ export default verbSlice.reducer;
 export const selectSelectedVerbs = (state: RootState) =>
   state.verb.selectedVerbs;
 export const selectLearnedVerbs = (state: RootState) => state.verb.learnedVerbs;
-export const selectFavoriteVerbs = (state: RootState) =>
-  state.verb.favoriteVerbs;
 export const selectResults = (state: RootState) => state.verb.results;

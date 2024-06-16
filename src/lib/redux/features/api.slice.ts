@@ -6,8 +6,8 @@ export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
   endpoints: (builder) => ({
-    getData: builder.query<Verb[], void>({
-      query: () => "data",
+    getVerbs: builder.query<Verb[], void>({
+      query: () => "verbs",
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -20,4 +20,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetDataQuery } = apiSlice;
+export const { useGetVerbsQuery } = apiSlice;

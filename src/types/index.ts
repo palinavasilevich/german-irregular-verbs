@@ -6,3 +6,5 @@ export type Verb = {
   translation: string;
   group: string;
 };
+
+export type VerbType = Verb & { isFavoriteVerb: boolean };

@@ -26,23 +26,23 @@ import {
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { RocketIcon } from "@radix-ui/react-icons";
+import { RocketIcon, StarIcon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 
 import ScrollToTop from "@/components/scrollToTop";
 
 import { useDispatch } from "react-redux";
 import {
-  addVerbs,
   addVerbsToStudy,
   removeSelectedVerbs,
+  selectFavoriteVerbs,
 } from "@/lib/redux/features/verb.slice";
-import { Verb } from "@/types";
+
+import { useSelector } from "react-redux";
 
 interface AllVerbsTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  verbs: Verb[];
 }
 
 interface CustomFilterMeta extends FilterMeta {
@@ -55,11 +55,12 @@ interface CustomFilterMeta extends FilterMeta {
 export function AllVerbsTable<TData, TValue>({
   columns,
   data,
-  verbs,
 }: AllVerbsTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
+
+  const favoriteVerbs = useSelector(selectFavoriteVerbs);
 
   const table = useReactTable({
     data,
@@ -92,14 +93,19 @@ export function AllVerbsTable<TData, TValue>({
     }
   };
 
+  const studyFavoriteVerbs = () => {
+    dispatch(removeSelectedVerbs());
+    dispatch(addVerbsToStudy(favoriteVerbs));
+    push("/practice");
+  };
+
   useEffect(() => {
-    dispatch(addVerbs(verbs));
     dispatch(removeSelectedVerbs());
   }, []);
 
   return (
     <div className="w-full space-y-2.5 overflow-auto">
-      <div className="flex items-center justify-between py-4">
+      <div className="flex items-center justify-between py-4 flex-wrap gap-y-4 md:flex-unwrap">
         <Input
           placeholder="Search verb..."
           value={
@@ -108,23 +114,38 @@ export function AllVerbsTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("infinitive")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-full md:max-w-sm"
         />
-        {table.getFilteredSelectedRowModel().rows.length > 0 && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onClickAddVerbsToStudy}
-            className="h-10 ml-4"
-          >
-            <RocketIcon className="mr-2 size-4" aria-hidden="true" />
-            {`Study ${table.getFilteredSelectedRowModel().rows.length} ${
-              table.getFilteredSelectedRowModel().rows.length === 1
-                ? "verb"
-                : "verbs"
-            }`}
-          </Button>
-        )}
+        <div className="flex">
+          {table.getFilteredSelectedRowModel().rows.length > 0 && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={onClickAddVerbsToStudy}
+              className="h-10 ml-0 md:ml-4 mr-4"
+            >
+              <RocketIcon className="mr-2 size-4" aria-hidden="true" />
+              {`Study ${table.getFilteredSelectedRowModel().rows.length} ${
+                table.getFilteredSelectedRowModel().rows.length === 1
+                  ? "verb"
+                  : "verbs"
+              }`}
+            </Button>
+          )}
+          {favoriteVerbs?.length > 0 && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={studyFavoriteVerbs}
+              className="h-10"
+            >
+              <StarIcon className="mr-2 size-4" aria-hidden="true" />
+              {`Study ${favoriteVerbs.length} ${
+                favoriteVerbs.length === 1 ? "favorite verb" : "favorite verbs"
+              }`}
+            </Button>
+          )}
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>

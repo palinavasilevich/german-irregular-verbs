@@ -1,7 +1,8 @@
 import MainSection from "@/components/mainSection";
 import PracticeVerbsTable from "@/components/tables/practiceVerbs/practiceVerbsTable";
 import { Spinner } from "@/components/ui/spinner";
-import { getLocalData } from "@/lib/getLocalData";
+import { getLocalData } from "@/utils/getLocalData";
+
 import { shuffleItemsOfArray } from "@/utils/shuffleItemsOfArray";
 
 async function getData() {

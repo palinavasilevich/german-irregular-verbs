@@ -114,15 +114,15 @@ export function AllVerbsTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("infinitive")?.setFilterValue(event.target.value)
           }
-          className="max-w-full md:max-w-sm"
+          className="max-w-full lg:max-w-sm md:mr-2"
         />
-        <div className="flex">
+        <div className="flex flex-wrap gap-y-4">
           {table.getFilteredSelectedRowModel().rows.length > 0 && (
             <Button
               variant="outline"
               size="sm"
               onClick={onClickAddVerbsToStudy}
-              className="h-10 ml-0 md:ml-4 mr-4"
+              className="h-10 ml-0 mr-4"
             >
               <RocketIcon className="mr-2 size-4" aria-hidden="true" />
               {`Study ${table.getFilteredSelectedRowModel().rows.length} ${

@@ -3,30 +3,19 @@
 import {
   ColumnDef,
   ColumnFiltersState,
-  flexRender,
   getCoreRowModel,
   useReactTable,
   getFilteredRowModel,
+  getPaginationRowModel,
   SortingState,
   getSortedRowModel,
-  FilterMeta,
-  Column,
   Table as TableType,
 } from "@tanstack/react-table";
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { RocketIcon, StarIcon } from "@radix-ui/react-icons";
+import { RocketIcon, StarIcon, Cross2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
 
 import ScrollToTop from "@/components/scrollToTop";
@@ -40,16 +29,13 @@ import {
 
 import { useSelector } from "react-redux";
 
+import { Verb, DataTableFilterField } from "@/types";
+import { DataTableFacetedFilter } from "@/components/dataTable/dataTableFacetedFilter";
+import { DataTable } from "@/components/dataTable/dataTable";
+
 interface AllVerbsTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-}
-
-interface CustomFilterMeta extends FilterMeta {
-  filterComponent: (info: {
-    column: Column<any, unknown>;
-    table: TableType<any>;
-  }) => JSX.Element;
 }
 
 export function AllVerbsTable<TData, TValue>({
@@ -71,6 +57,7 @@ export function AllVerbsTable<TData, TValue>({
     getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
 
     state: {
       rowSelection,
@@ -81,6 +68,9 @@ export function AllVerbsTable<TData, TValue>({
 
   const dispatch = useDispatch();
   const { push } = useRouter();
+
+  const isFiltered = table.getState().columnFilters.length > 0;
+  const isSelected = table.getFilteredSelectedRowModel().rows.length > 0;
 
   const onClickAddVerbsToStudy = () => {
     const selectedVerbs = table
@@ -99,13 +89,51 @@ export function AllVerbsTable<TData, TValue>({
     push("/practice");
   };
 
+  const getGroups = (verbs: Verb[]) => {
+    return verbs.reduce((acc, verb) => {
+      if (
+        !acc.some((group: DataTableFilterField) => group.label === verb.group)
+      ) {
+        const countGroups = verbs.filter((v) => v.group === verb.group).length;
+
+        acc.push({
+          label: verb.group,
+          value: verb.group,
+          count: countGroups,
+        });
+      }
+      return acc;
+    }, [] as DataTableFilterField[]);
+  };
+
   useEffect(() => {
     dispatch(removeSelectedVerbs());
   }, []);
 
+  const filterableColumns = [
+    {
+      label: "Groups",
+      value: "group",
+      options: getGroups(data),
+    },
+  ];
+
+  const resetFilter = () => {
+    if (isFiltered) {
+      table.resetColumnFilters();
+    }
+
+    if (isSelected) {
+      table.toggleAllPageRowsSelected(false);
+    }
+
+    if (favoriteVerbs?.length > 0) {
+    }
+  };
+
   return (
     <div className="w-full space-y-2.5 overflow-auto">
-      <div className="flex items-center justify-between py-4 flex-wrap gap-y-4 md:flex-unwrap">
+      <div className="flex gap-4">
         <Input
           placeholder="Search verb..."
           value={
@@ -114,99 +142,69 @@ export function AllVerbsTable<TData, TValue>({
           onChange={(event) =>
             table.getColumn("infinitive")?.setFilterValue(event.target.value)
           }
-          className="max-w-full lg:max-w-sm md:mr-2"
+          className="max-w-full lg:max-w-sm"
         />
-        <div className="flex flex-wrap gap-y-4">
-          {table.getFilteredSelectedRowModel().rows.length > 0 && (
+
+        <div className="flex gap-4 justify-between w-full">
+          {filterableColumns.length > 0 &&
+            filterableColumns.map(
+              (column) =>
+                table.getColumn(column.value ? String(column.value) : "") && (
+                  <DataTableFacetedFilter
+                    key={String(column.value)}
+                    column={table.getColumn(
+                      column.value ? String(column.value) : ""
+                    )}
+                    title={column.label}
+                    options={column.options ?? []}
+                  />
+                )
+            )}
+          {(isFiltered || isSelected || favoriteVerbs.length > 0) && (
             <Button
+              aria-label="Reset filters"
               variant="outline"
               size="sm"
-              onClick={onClickAddVerbsToStudy}
-              className="h-10 ml-0 mr-4"
+              className="h-10 px-2 lg:px-3 border self-end"
+              onClick={() => resetFilter()}
             >
-              <RocketIcon className="mr-2 size-4" aria-hidden="true" />
-              {`Study ${table.getFilteredSelectedRowModel().rows.length} ${
-                table.getFilteredSelectedRowModel().rows.length === 1
-                  ? "verb"
-                  : "verbs"
-              }`}
-            </Button>
-          )}
-          {favoriteVerbs?.length > 0 && (
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={studyFavoriteVerbs}
-              className="h-10"
-            >
-              <StarIcon className="mr-2 size-4" aria-hidden="true" />
-              {`Study ${favoriteVerbs.length} ${
-                favoriteVerbs.length === 1 ? "favorite verb" : "favorite verbs"
-              }`}
+              Reset filters
+              <Cross2Icon className="ml-2 size-4" aria-hidden="true" />
             </Button>
           )}
         </div>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.column.columnDef?.meta &&
-                      (header.column.columnDef?.meta as CustomFilterMeta)
-                        .filterComponent
-                        ? (
-                            header.column.columnDef?.meta as CustomFilterMeta
-                          ).filterComponent({
-                            column: header.column,
-                            table,
-                          })
-                        : header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        <ScrollToTop />
+      <div className="flex flex-wrap gap-4 my-4">
+        {isSelected && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={onClickAddVerbsToStudy}
+            className="h-10 ml-0"
+          >
+            <RocketIcon className="mr-2 size-4" aria-hidden="true" />
+            {`Study ${table.getFilteredSelectedRowModel().rows.length} ${
+              table.getFilteredSelectedRowModel().rows.length === 1
+                ? "verb"
+                : "verbs"
+            }`}
+          </Button>
+        )}
+        {favoriteVerbs?.length > 0 && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={studyFavoriteVerbs}
+            className="h-10"
+          >
+            <StarIcon className="mr-2 size-4" aria-hidden="true" />
+            {`Study ${favoriteVerbs.length} ${
+              favoriteVerbs.length === 1 ? "favorite verb" : "favorite verbs"
+            }`}
+          </Button>
+        )}
       </div>
+      <DataTable table={table} />
     </div>
   );
 }

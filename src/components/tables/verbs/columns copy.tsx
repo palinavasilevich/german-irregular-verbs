@@ -102,15 +102,12 @@ export const columns: ColumnDef<Verb>[] = [
   },
   {
     accessorKey: "group",
-    header: () => (
-      <div className="text-sm md:text-base font-bold capitalize">Group</div>
-    ),
-
-    filterFn: (row, id, value) => {
-      return Array.isArray(value) && value.includes(row.getValue(id));
+    header: "Group",
+    filterFn: selectFilterFn,
+    meta: {
+      filterComponent: MultiSelect,
     },
   },
-
   {
     id: "actions",
     cell: FavoriteVerbsCell,

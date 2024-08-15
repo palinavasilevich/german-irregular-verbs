@@ -9,7 +9,6 @@ import {
   getPaginationRowModel,
   SortingState,
   getSortedRowModel,
-  Table as TableType,
 } from "@tanstack/react-table";
 
 import { useEffect, useState } from "react";
@@ -123,9 +122,7 @@ export function AllVerbsTable<TData, TValue>({
       table.resetColumnFilters();
     }
 
-    if (isSelected) {
-      table.toggleAllPageRowsSelected(false);
-    }
+    table.toggleAllPageRowsSelected(false);
 
     if (favoriteVerbs?.length > 0) {
     }
@@ -168,8 +165,8 @@ export function AllVerbsTable<TData, TValue>({
               className="h-10 px-2 lg:px-3 border self-end"
               onClick={() => resetFilter()}
             >
+              <Cross2Icon className="mr-2 size-4" aria-hidden="true" />
               Reset filters
-              <Cross2Icon className="ml-2 size-4" aria-hidden="true" />
             </Button>
           )}
         </div>

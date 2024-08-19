@@ -88,8 +88,8 @@ export function AllVerbsTable<TData, TValue>({
     push("/practice");
   };
 
-  const getGroups = (verbs: Verb[]) => {
-    return verbs.reduce((acc, verb) => {
+  const getGroups = (verbs: any) => {
+    return verbs.reduce((acc: DataTableFilterField[], verb: Verb) => {
       if (
         !acc.some((group: DataTableFilterField) => group.label === verb.group)
       ) {

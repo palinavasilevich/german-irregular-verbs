@@ -131,8 +131,8 @@ export function AllVerbsTable<TData, TValue>({
   };
 
   return (
-    <div className="w-full space-y-2.5 overflow-auto">
-      <div className="flex gap-4">
+    <DataTable table={table}>
+      <div className="flex gap-4 flex-wrap md:flex-unwrap">
         <Input
           placeholder="Search verb..."
           value={
@@ -203,7 +203,6 @@ export function AllVerbsTable<TData, TValue>({
           </Button>
         )}
       </div>
-      <DataTable table={table} />
-    </div>
+    </DataTable>
   );
 }

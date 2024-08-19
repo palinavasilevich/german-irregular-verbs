@@ -203,6 +203,7 @@ export function AllVerbsTable<TData, TValue>({
           </Button>
         )}
       </div>
+      <ScrollToTop />
     </DataTable>
   );
 }

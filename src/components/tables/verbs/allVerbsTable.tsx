@@ -93,7 +93,9 @@ export function AllVerbsTable<TData, TValue>({
       if (
         !acc.some((group: DataTableFilterField) => group.label === verb.group)
       ) {
-        const countGroups = verbs.filter((v) => v.group === verb.group).length;
+        const countGroups = verbs.filter(
+          (v: Verb) => v.group === verb.group
+        ).length;
 
         acc.push({
           label: verb.group,

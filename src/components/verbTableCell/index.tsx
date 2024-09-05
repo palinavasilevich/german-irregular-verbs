@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { speakToText } from "@/utils/speakToText";
 
 import { PlayIcon } from "@radix-ui/react-icons";
-import { Row } from "@tanstack/react-table";
 
 interface VerbTableCellPropsType {
   verb: string;
